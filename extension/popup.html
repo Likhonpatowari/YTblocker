@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Blocker Settings</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="popup-body">
+    <!-- Password Setup / Verification Overlay -->
+    <div id="passwordOverlay" class="overlay hidden">
+        <h3 id="overlayTitle">Security Check</h3>
+        <p id="overlaySub">Please enter password to continue</p>
+        <div class="input-group" style="width: 80%;">
+            <input type="password" id="authPassword" placeholder="Enter password...">
+        </div>
+        <button id="authBtn" class="primary-btn">Unlock</button>
+        <button id="cancelAuthBtn" class="secondary-btn" style="margin-top: 8px;">Cancel</button>
+    </div>
+
+    <!-- Initial Password Setup Overlay -->
+    <div id="setupOverlay" class="overlay hidden">
+        <h3>Welcome</h3>
+        <p>Set a password to protect your settings.</p>
+        <div class="input-group" style="width: 80%;">
+            <input type="password" id="newPassword" placeholder="Set password...">
+        </div>
+        <button id="savePasswordBtn" class="primary-btn">Set Password</button>
+    </div>
+
+    <div class="popup-container">
+        <div class="header">
+            <div class="title">YouTube Smart Blocker</div>
+            <div class="status-toggle">
+                <span id="statusLabel" style="font-size: 12px; font-weight: 600;">ON</span>
+                <label class="switch">
+                    <input type="checkbox" id="mainToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛡️ General Settings</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 13px;">
+                <span>Block YouTube Shorts</span>
+                <label class="switch" style="transform: scale(0.8);">
+                    <input type="checkbox" id="shortsToggle" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🔍 Keywords Logic</div>
+            <div class="input-group">
+                <input type="text" id="keywordInput" placeholder="Add keyword (e.g. cartoon)">
+                <button id="addKeywordBtn" class="primary-btn">Add</button>
+            </div>
+            <div id="keywordList" class="keyword-list">
+                <!-- Keywords will be injected here -->
+            </div>
+        </div>
+
+        <div class="save-status" id="saveStatus"></div>
+
+        <div style="margin-top: 10px; display: flex; gap: 8px;">
+            <button id="resetBtn" class="secondary-btn" style="flex: 1;">Reset Defaults</button>
+            <button id="changePassBtn" class="secondary-btn" style="flex: 1;">Change Password</button>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

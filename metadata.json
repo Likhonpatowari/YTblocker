@@ -1,0 +1,6 @@
+{
+  "name": "YouTube Smart Content Blocker",
+  "description": "A production-ready Chrome Extension to block kids' content and YouTube Shorts with password protection and custom keyword filtering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
