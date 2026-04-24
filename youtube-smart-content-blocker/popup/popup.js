@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mainToggle = document.getElementById('mainToggle');
-    const shortsToggle = document.getElementById('shortsToggle');
     const keywordInput = document.getElementById('keywordInput');
     const addKeywordBtn = document.getElementById('addKeywordBtn');
     const keywordList = document.getElementById('keywordList');
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentSettings = result;
         if (!result.password) setupOverlay.classList.remove('hidden');
         mainToggle.checked = result.enabled;
-        shortsToggle.checked = result.blockShorts;
         renderKeywords(result.keywords || []);
     });
 
@@ -23,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         keywords.forEach(k => {
             const tag = document.createElement('div');
             tag.className = 'keyword-tag';
-            tag.innerHTML = `${k} <span class="remove" data-word="${k}">×</span>`;
+            tag.innerHTML = `<span>${k}</span> <span class="remove" data-word="${k}">×</span>`;
             keywordList.appendChild(tag);
         });
         document.querySelectorAll('.remove').forEach(b => b.onclick = () => removeKeyword(b.dataset.word));
@@ -31,45 +29,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const save = () => chrome.storage.sync.set({
         enabled: mainToggle.checked,
-        blockShorts: shortsToggle.checked,
         keywords: currentSettings.keywords
     });
 
     mainToggle.onchange = (e) => {
         if (!e.target.checked) {
-            mainToggle.checked = true;
+            mainToggle.checked = true; // রিভার্ট
             pendingAction = () => { mainToggle.checked = false; save(); };
             passwordOverlay.classList.remove('hidden');
         } else save();
     };
 
-    shortsToggle.onchange = () => save();
     addKeywordBtn.onclick = () => {
-        const word = keywordInput.value.trim().toLowerCase();
+        const word = keywordInput.value.trim();
         if (word) {
-            currentSettings.keywords.push(word);
-            renderKeywords(currentSettings.keywords);
-            save();
+            if (!currentSettings.keywords.includes(word)) {
+                currentSettings.keywords.push(word);
+                renderKeywords(currentSettings.keywords);
+                save();
+            }
             keywordInput.value = '';
         }
     };
+
     function removeKeyword(word) {
         currentSettings.keywords = currentSettings.keywords.filter(k => k !== word);
         renderKeywords(currentSettings.keywords);
         save();
     }
+
     document.getElementById('authBtn').onclick = () => {
         if (document.getElementById('authPassword').value === currentSettings.password) {
             passwordOverlay.classList.add('hidden');
+            document.getElementById('authPassword').value = '';
             if (pendingAction) pendingAction();
-        } else alert('Wrong password');
+        } else alert('ভুল পাসওয়ার্ড!');
     };
+
     document.getElementById('savePasswordBtn').onclick = () => {
         const p = document.getElementById('newPassword').value;
         if (p.length >= 4) {
             chrome.storage.sync.set({ password: p });
             currentSettings.password = p;
             setupOverlay.classList.add('hidden');
-        }
+        } else alert('কমপক্ষে ৪ অক্ষরের পাসওয়ার্ড দিন');
     };
 });

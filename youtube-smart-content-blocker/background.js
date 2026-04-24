@@ -1,9 +1,8 @@
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.get(['enabled', 'keywords', 'blockShorts', 'password'], (result) => {
+  chrome.storage.sync.get(['enabled', 'keywords', 'password'], (result) => {
     const defaults = {
       enabled: true,
-      blockShorts: true,
-      keywords: ["cartoon", "kids", "animation", "doraemon", "shinchan", "tom and jerry", "motu patlu", "nursery rhymes", "cocomelon"],
+      keywords: ["cartoon", "kids", "doraemon", "shinchan", "motu patlu", "oggy", "rudra", "franklin"],
       password: ""
     };
     const newSettings = {};
