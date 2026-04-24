@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="popup-body">
+    <div id="passwordOverlay" class="overlay hidden">
+        <h3>Security Check</h3>
+        <div class="input-group"><input type="password" id="authPassword" placeholder="Password..."></div>
+        <button id="authBtn" class="primary-btn">Unlock</button>
+        <button id="cancelAuthBtn" class="secondary-btn">Cancel</button>
+    </div>
+    <div id="setupOverlay" class="overlay hidden">
+        <h3>Set Password</h3>
+        <div class="input-group"><input type="password" id="newPassword" placeholder="Set password..."></div>
+        <button id="savePasswordBtn" class="primary-btn">Set</button>
+    </div>
+    <div class="popup-container">
+        <div class="header">
+            <div class="title">Smart Blocker</div>
+            <div class="status-toggle">
+                <span id="statusLabel">ON</span>
+                <label class="switch"><input type="checkbox" id="mainToggle" checked><span class="slider"></span></label>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">Shorts</div>
+            <label class="switch"><input type="checkbox" id="shortsToggle" checked><span class="slider"></span></label>
+        </div>
+        <div class="section">
+            <div class="section-title">Keywords</div>
+            <div class="input-group">
+                <input type="text" id="keywordInput" placeholder="Add...">
+                <button id="addKeywordBtn" class="primary-btn">Add</button>
+            </div>
+            <div id="keywordList" class="keyword-list"></div>
+        </div>
+        <div class="save-status" id="saveStatus"></div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Smart Content Blocker",
+  "version": "1.0",
+  "description": "Block kids/cartoon content and YouTube Shorts with password protection.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["popup/style.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": ["*://*.youtube.com/*"]
+}
